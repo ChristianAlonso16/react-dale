@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/components/Auth/hooks/useAuth";
 import { useUsers } from "@/app/users/hooks/useUsers";
-import UserModal from "@/components/User/addUser/UserModal";
-import UserCard from "@/components/User/listUsers/UserCard";
-import UserTable from "@/components/User/listUsers/UserTable";
+import UserModal from "@/components/user/addUser/UserModal";
+import UserCard from "@/components/user/listUsers/UserCard";
+import UserTable from "@/components/user/listUsers/UserTable";
 import UserSearch from "@/components/User/searchUser/SearchUser";
 import { Button, Row, Col } from "react-bootstrap";
 

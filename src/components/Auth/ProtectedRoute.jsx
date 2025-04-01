@@ -1,24 +1,32 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { useAuth } from "@/components/Auth/hooks/useAuth";
+import {useAuth} from "@/components/Auth/hooks/useAuth";
 
 const ProtectedRoute = ({ children }) => {
-    const { user } = useAuth();
-    const router = useRouter();
-    const path = usePathname();
+  const { user } = useAuth();
+  const router = useRouter();
+  const pathname = usePathname();
 
-    const isPublic = path === "/login";
+  const isLoginPage = pathname === "/login";
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
-    useEffect(() => {
-        if (!user && !isPublic) {
-            router.replace("/login");
-        }
-    }, [user, isPublic, router]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCheckingAuth(false);
+    }, 100);
 
-    if (!user && !isPublic) return null;
+    return () => clearTimeout(timer);
+  }, []);
 
-    return children;
+  useEffect(() => {
+    if (!checkingAuth && !user && !isLoginPage) {
+      router.replace("/login");
+    }
+  }, [checkingAuth, user, isLoginPage, router]);
+
+
+  return children;
 };
 
 export default ProtectedRoute;

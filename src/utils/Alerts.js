@@ -1,4 +1,3 @@
-// src/app/utils/alerts.js (o donde lo tengas)
 import Swal from "sweetalert2";
 
 const showMessage = async (message, status) => {
@@ -20,18 +19,6 @@ const showMessage = async (message, status) => {
     });
 };
 
-const loading = async () => {
-    Swal.fire({
-        title: "Cargando...",
-        text: "Por favor espere...",
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        willOpen: () => {
-            Swal.showLoading();
-        },
-    });
-};
-
 const confirmSome = async ({ title = "¿Estás seguro?", text = "Esta acción no se puede deshacer." }) => {
     const result = await Swal.fire({
         title,
@@ -47,6 +34,5 @@ const confirmSome = async ({ title = "¿Estás seguro?", text = "Esta acción no
 
 export default {
     showMessage,
-    loading,
     confirmSome
 };

@@ -1,64 +1,79 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
+import { getEmailError,getNameError } from "@/utils/Validations";
 
 const UserForm = ({ initialData = {}, onSubmit }) => {
-    const [form, setForm] = useState({ name: "", email: "" });
-    const [error, setError] = useState("");
+  const [form, setForm] = useState({ name: "", email: "" });
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
-    useEffect(() => {
-        if (initialData) {
-            setForm({
-                name: initialData.name || "",
-                email: initialData.email || "",
-            });
-        }
-    }, [initialData]);
+  useEffect(() => {
+    if (initialData) {
+      setForm({
+        name: initialData.name || "",
+        email: initialData.email || "",
+      });
+    }
+  }, [initialData]);
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  
+    if (name === "name") setNameError(getNameError(value));
+    if (name === "email") setEmailError(getEmailError(value));
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!form.name || !form.email) {
-            setError("Todos los campos son obligatorios.");
-            return;
-        }
-        setError("");
-        onSubmit(form);
-        setForm({ name: "", email: "" });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.email || nameError || emailError) return;
 
-    return (
-        <Form onSubmit={handleSubmit}>
-            {error && <Alert variant="danger">{error}</Alert>}
+    onSubmit(form);
+    setForm({ name: "", email: "" });
+  };
 
-            <Form.Group className="mb-3">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                />
-            </Form.Group>
+  const isDisabled =
+    !form.name.trim() ||
+    !form.email.trim() ||
+    !!nameError ||
+    !!emailError;
 
-            <Form.Group className="mb-3">
-                <Form.Label>Correo</Form.Label>
-                <Form.Control
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                />
-            </Form.Group>
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          isInvalid={!!nameError}
+        />
+        <Form.Control.Feedback type="invalid">
+          {nameError}
+        </Form.Control.Feedback>
+      </Form.Group>
 
-            <Button type="submit" variant="primary">
-                {initialData ? "Editar" : "Guardar"}
-            </Button>
-        </Form>
-    );
+      <Form.Group className="mb-3">
+        <Form.Label>Correo</Form.Label>
+        <Form.Control
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          isInvalid={!!emailError}
+        />
+        <Form.Control.Feedback type="invalid">
+          {emailError}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Button disabled={isDisabled} type="submit" variant="primary">
+        {initialData ? "Editar" : "Guardar"}
+      </Button>
+    </Form>
+  );
 };
 
 export default UserForm;

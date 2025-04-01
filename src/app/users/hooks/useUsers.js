@@ -22,8 +22,8 @@ export const useUsers = () => {
         try {
             const data = await getUsers();
             setUsers(data);
-        } catch (err) {
-            console.error("Error al obtener usuarios:", err);
+        } catch (error) {
+            console.error("Algo sucedio al obtener usuarios", error);
         } finally {
             setLoading(false);
         }
@@ -34,8 +34,8 @@ export const useUsers = () => {
             const newUser = await createUser(userData);
             alerts.showMessage("Usuario creado correctamente", "success");
             setUsers([...users, newUser]);
-        } catch (err) {
-            console.error("Error al crear usuario:", err);
+        } catch (error) {
+            console.error("Algo sucedio al crear usuario", error);
         }
     };
 
@@ -44,8 +44,8 @@ export const useUsers = () => {
             const updatedUser = await updateUser(id, userData);
             alerts.showMessage("Usuario actualizado correctamente", "success");
             setUsers(users.map((u) => (u.id === id ? updatedUser : u)));
-        } catch (err) {
-            console.error("Error al actualizar usuario:", err);
+        } catch (error) {
+            console.error("Algo sucedio al actualizar usuario", error);
         }
     };
 
@@ -54,8 +54,8 @@ export const useUsers = () => {
             await deleteUser(id);
             alerts.showMessage("Usuario eliminado correctamente", "success");
             setUsers(users.filter((u) => u.id !== id));
-        } catch (err) {
-            console.error("Error al eliminar usuario:", err);
+        } catch (error) {
+            console.error("Algo sucedio al eliminar usuario:", error);
         }
     };
 

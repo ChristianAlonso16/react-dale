@@ -37,11 +37,10 @@ client.interceptors.response.use(
             switch (error.response.status) {
                 case 400:
                     Alerts.showMessage("Proceso incorrecto", "error")
-
                     break;
                 case 401:
                     Alerts.showMessage("Usuario invalido", "error")
-
+                    localStorage.removeItem('token')
                     break;
                 case 403:
                     Alerts.showMessage("Proceso invalido", "error")
@@ -52,7 +51,6 @@ client.interceptors.response.use(
                 case 500:
                     Alerts.showMessage("Algo sucedio con el servicio", "error")
                     break;
-
             }
             return Promise.reject(error)
         }

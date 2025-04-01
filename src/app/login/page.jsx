@@ -32,7 +32,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="container d-flex justify-content-center align-items-center vh-100">
             <Card style={{ width: "100%", maxWidth: "400px" }} className="p-4">
                 <h3 className="mb-4 text-center">Iniciar sesión</h3>
                 {error && <Alert variant="danger">{error}</Alert>}

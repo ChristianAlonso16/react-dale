@@ -1,8 +1,8 @@
 import { Table, Button } from "react-bootstrap";
 
 const UserTable = ({ users, onEdit, onDelete, currentUser }) => (
-    <Table striped bordered hover>
-        <thead>
+    <Table striped bordered responsive hover className="text-center">
+        <thead >
             <tr>
                 <th>Nombre</th>
                 <th>Email</th>
@@ -15,12 +15,18 @@ const UserTable = ({ users, onEdit, onDelete, currentUser }) => (
                     <td>{u.name}</td>
                     <td>{u.email}</td>
                     <td>
-                        {/* {currentUser?.email === u.email && ( */}
-                        <>
-                            <Button variant="primary" onClick={() => onEdit(u)}>Editar</Button>{" "}
-                            <Button variant="danger" onClick={() => onDelete(u.id)}>Eliminar</Button>
-                        </>
-                        {/* )} */}
+                    {(currentUser?.email === u.email || currentUser?.role === "admin") && (
+                            <>
+                                <Button title="Editar usuario" variant="secondary" size="sm" onClick={() => onEdit(u)} className="me-2">
+                                    <i className="bi bi-pencil-square"></i>
+                                </Button>
+
+                                <Button title="Eliminar usuario" variant="danger" size="sm" onClick={() => onDelete(u.id)}>
+                                    <i className="bi bi-trash"></i>
+                                </Button>
+
+                            </>
+                        )}
                     </td>
                 </tr>
             ))}

@@ -1,10 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AuthProvider } from "@/components/Auth/context/AuthContext";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 
 export const metadata = {
-  title: "CRUD Usuarios",
-  description: "Examen técnico con Next.js",
+  title: "Users",
+  description: "Exam",
 };
 
 export default function RootLayout({ children }) {
@@ -13,9 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <AuthProvider>
           <ProtectedRoute>
-            <div className="container my-4 p-4 shadow">
               {children}
-            </div>
           </ProtectedRoute>
         </AuthProvider>
       </body>

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useState, useEffect } from "react";
+import { encodeBase64, decodeBase64 } from "@/utils/Crypto";
 
 export const AuthContext = createContext();
 
@@ -8,14 +9,26 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) setUser(JSON.parse(storedUser));
-    }, []);
+        const stored = localStorage.getItem("user");
+
+        if (stored) {
+          const decodedUser = decodeBase64(stored);
+          if (decodedUser) setUser(decodedUser);
+        }
+      }, []);
 
     const login = (userData) => {
-        localStorage.setItem("user", JSON.stringify(userData));
-        setUser(userData);
-    };
+        const sessionUser = {
+          id: userData.id,
+          email: userData.email,
+          name: userData.name,
+          role: userData.role
+        };
+      
+        const encoded = encodeBase64(sessionUser);
+        localStorage.setItem("user", encoded);
+        setUser(sessionUser);
+      };
 
     const logout = () => {
         localStorage.removeItem("user");

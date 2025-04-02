@@ -6,38 +6,39 @@ import { encodeBase64, decodeBase64 } from "@/utils/Crypto";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        const stored = localStorage.getItem("user");
+  useEffect(() => {
+    const stored = localStorage.getItem("user");
 
-        if (stored) {
-          const decodedUser = decodeBase64(stored);
-          if (decodedUser) setUser(decodedUser);
-        }
-      }, []);
+    if (stored) {
+      //Decodifica el valor del objeto del usuario en sesion para poder utilizar sus propiedades en los componentes
+      const decodedUser = decodeBase64(stored);
+      if (decodedUser) setUser(decodedUser);
+    }
+  }, []);
 
-    const login = (userData) => {
-        const sessionUser = {
-          id: userData.id,
-          email: userData.email,
-          name: userData.name,
-          role: userData.role
-        };
-      
-        const encoded = encodeBase64(sessionUser);
-        localStorage.setItem("user", encoded);
-        setUser(sessionUser);
-      };
-
-    const logout = () => {
-        localStorage.removeItem("user");
-        setUser(null);
+  const login = (userData) => {
+    const sessionUser = {
+      id: userData.id,
+      email: userData.email,
+      name: userData.name,
+      role: userData.role
     };
+    //Se envia codificado al local storage para evitar manipulaciones al rol del usuario y acceder a funciones no autorizadas
+    const encoded = encodeBase64(sessionUser);
+    localStorage.setItem("user", encoded);
+    setUser(sessionUser);
+  };
 
-    return (
-        <AuthContext.Provider value={{ user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const logout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

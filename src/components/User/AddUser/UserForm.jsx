@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { getEmailError,getNameError } from "@/utils/Validations";
+import { getEmailError, getNameError } from "@/utils/Validations";
 
 const UserForm = ({ initialData = {}, onSubmit }) => {
   const [form, setForm] = useState({ name: "", email: "" });
@@ -20,7 +20,7 @@ const UserForm = ({ initialData = {}, onSubmit }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
-  
+
     if (name === "name") setNameError(getNameError(value));
     if (name === "email") setEmailError(getEmailError(value));
   };
@@ -33,6 +33,7 @@ const UserForm = ({ initialData = {}, onSubmit }) => {
     setForm({ name: "", email: "" });
   };
 
+  //Se desactiva el boton de guardar/editar si no estan llenos los campos o si hay errores de formato
   const isDisabled =
     !form.name.trim() ||
     !form.email.trim() ||

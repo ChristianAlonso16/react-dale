@@ -58,17 +58,17 @@ export const useUsers = () => {
             console.error("Algo sucedio al eliminar usuario:", error);
         }
     };
-
+    //Funcion para mostrar el modal en modo creacion de usuario
     const handleNew = () => {
         setSelectedUser(null);
         setShowModal(true);
     };
-
+    //Funcion para mostrar el modal en modo edicion de usuario, cargando el usuario selecciondo
     const handleEdit = (user) => {
         setSelectedUser(user);
         setShowModal(true);
     };
-
+    //Funcion generica para guardar o editar el usuario, si existe un usuario seleccionado se ejecuta la edicion, de lo contrario se guarda el nuevo registro
     const handleSave = (data) => {
         if (selectedUser) {
             handleUpdate(selectedUser.id, data);
@@ -84,7 +84,7 @@ export const useUsers = () => {
             title: "¿Eliminar usuario?",
             text: "Esta acción eliminará permanentemente al usuario."
         });
-
+        // confirmed es un valor bool que retorna la alerta de confirmacion, si el usuario acepta la alerta, se ejecuta la funcion de eliminar
         if (confirmed) {
             await handleDelete(id);
         }

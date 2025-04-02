@@ -15,7 +15,7 @@ client.interceptors.request.use(
     }
 )
 
-
+//Se genero un interceptor de respuestas para poder generar de manera global mensajes de status code comunes y cachar los errores de las apis
 client.interceptors.response.use(
     (response) => {
         if (response.status === 200 || response.status === 201) {

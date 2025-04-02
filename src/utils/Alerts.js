@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+//Dentro de este archivo se generaron alertas globales para reutilizar en diferentes componentes
 
 const showMessage = async (message, status) => {
     const Toast = Swal.mixin({

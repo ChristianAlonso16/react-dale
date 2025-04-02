@@ -26,8 +26,10 @@ const UserPage = () => {
 
 
     useEffect(() => {
+        //Funcion que evalua si la dimension de la pantalla es de dispositivos moviles
         const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
         checkIsMobile();
+        //Si el evento detecta una pantalla pequeña el isMobile valida en la renderizacion para mostrar un layout diferente de lista de usuarios
         window.addEventListener("resize", checkIsMobile);
         return () => window.removeEventListener("resize", checkIsMobile);
     }, []);
@@ -39,7 +41,7 @@ const UserPage = () => {
     const handleSearchChange = (e) => {
         setSearch(e.target.value);
     };
-
+    //Filtra a todos los usuarios en base al criterio que se escriba, tal sea el correo o el nombre
     const filteredUsers = users.filter((u) =>
         u.name.toLowerCase().includes(search.toLowerCase()) ||
         u.email.toLowerCase().includes(search.toLowerCase())

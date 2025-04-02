@@ -12,6 +12,7 @@ const ProtectedRoute = ({ children }) => {
   const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
+    //Se coloca un tiempo de espera al recargar la pagina para permitir que el contexto cargue adecuadamente
     const timer = setTimeout(() => {
       setCheckingAuth(false);
     }, 100);

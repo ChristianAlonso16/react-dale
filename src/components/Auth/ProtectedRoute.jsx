@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import {useAuth} from "@/components/Auth/hooks/useAuth";
+import { useAuth } from "@/components/auth/hooks/useAuth";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();

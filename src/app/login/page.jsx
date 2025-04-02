@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Form, Button, Alert, Card } from "react-bootstrap";
 import usersData from "@/data/users-login.json";
-import { useAuth } from "@/components/Auth/hooks/useAuth";
+import { useAuth } from "@/components/auth/hooks/useAuth";
 
 export default function LoginPage() {
     const { login } = useAuth();

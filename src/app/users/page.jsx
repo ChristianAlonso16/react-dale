@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/components/Auth/hooks/useAuth";
+import { useAuth } from "@/components/auth/hooks/useAuth";
 import { useUsers } from "@/app/users/hooks/useUsers";
-import UserModal from "@/components/User/addUser/UserModal";
-import UserCard from "@/components/User/listUsers/UserCard";
-import UserTable from "@/components/User/listUsers/UserTable";
-import UserSearch from "@/components/User/searchUser/SearchUser";
+import UserModal from "@/components/user/addUser/UserModal";
+import UserCard from "@/components/user/listUsers/UserCard";
+import UserTable from "@/components/user/listUsers/UserTable";
+import UserSearch from "@/components/user/searchUser/SearchUser";
 import { Button, Row, Col } from "react-bootstrap";
 
 const UserPage = () => {
@@ -66,7 +66,7 @@ const UserPage = () => {
                 </Col>
                 <Col xs={12} md={8} className="text-end mb-3">
                     <Button title="Agregar usuario" size="sm" onClick={handleNew}>
-                    <i className="bi bi-plus-lg"></i>
+                        <i className="bi bi-plus-lg"></i>
                     </Button>
                 </Col>
             </Row>

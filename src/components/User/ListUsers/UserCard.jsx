@@ -5,7 +5,7 @@ const UserCard = ({ user, onEdit, onDelete, currentUser }) => (
         <Card.Body>
             <Card.Title>{user.name}</Card.Title>
             <Card.Text>{user.email}</Card.Text>
-            {(currentUser?.email === user.email || currentUser?.role === "admin") && (
+            {(currentUser?.id === user.id || currentUser?.role === "admin") && (
                 <>
                     <Button variant="secondary" size="sm" onClick={() => onEdit(user)} className="me-2">
                         <i className="bi bi-pencil-square"></i>

@@ -64,11 +64,14 @@ const UserPage = () => {
                 <Col xs={12} md={4}>
                     <UserSearch value={search} onChange={handleSearchChange} />
                 </Col>
-                <Col xs={12} md={8} className="text-end mb-3">
-                    <Button title="Agregar usuario" size="sm" onClick={handleNew}>
-                        <i className="bi bi-plus-lg"></i>
-                    </Button>
-                </Col>
+                {(user?.role === "admin") && (
+
+                    <Col xs={12} md={8} className="text-end mb-3">
+                        <Button title="Agregar usuario" size="sm" onClick={handleNew}>
+                            <i className="bi bi-plus-lg"></i>
+                        </Button>
+                    </Col>
+                )}
             </Row>
 
             <UserModal

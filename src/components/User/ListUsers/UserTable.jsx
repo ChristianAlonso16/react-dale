@@ -15,7 +15,7 @@ const UserTable = ({ users, onEdit, onDelete, currentUser }) => (
                     <td>{u.name}</td>
                     <td>{u.email}</td>
                     <td>
-                    {(currentUser?.email === u.email || currentUser?.role === "admin") && (
+                        {(currentUser?.id === u.id || currentUser?.role === "admin") && (
                             <>
                                 <Button title="Editar usuario" variant="secondary" size="sm" onClick={() => onEdit(u)} className="me-2">
                                     <i className="bi bi-pencil-square"></i>

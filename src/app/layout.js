@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { AuthProvider } from "@/components/auth/context/AuthContext";
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import { AuthProvider } from "@/components/Auth/context/AuthContext";
+import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 
 export const metadata = {
   title: "Users",

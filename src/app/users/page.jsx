@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/components/auth/hooks/useAuth";
+import { useAuth } from "@/components/Auth/hooks/useAuth";
 import { useUsers } from "@/app/users/hooks/useUsers";
 import UserModal from "@/components/User/AddUser/UserModal";
 import UserCard from "@/components/User/ListUsers/UserCard";
